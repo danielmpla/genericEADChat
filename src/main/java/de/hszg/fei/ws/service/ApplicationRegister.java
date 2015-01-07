@@ -1,4 +1,4 @@
-package service;
+package de.hszg.fei.ws.service;
 
 import java.util.HashSet;
 import java.util.Set;

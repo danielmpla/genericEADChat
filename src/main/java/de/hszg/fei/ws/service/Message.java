@@ -1,9 +1,10 @@
-package service;
+package de.hszg.fei.ws.service;
 
-public class User {
-	
+public class Message {
+
 	String userID;
 	String appID;
+	String message;
 	
 	public String getUserID() {
 		return userID;
@@ -16,5 +17,11 @@ public class User {
 	}
 	public void setAppID(String appID) {
 		this.appID = appID;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

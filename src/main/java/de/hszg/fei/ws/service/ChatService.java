@@ -1,4 +1,4 @@
-package service;
+package de.hszg.fei.ws.service;
 
 import javax.ws.rs.core.Response;
 
