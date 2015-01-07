@@ -7,6 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>genericEADChat Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+		<org.hibernate.version>4.3.5.Final</org.hibernate.version>
+		<org.hibernate.validator.version>5.1.2.Final</org.hibernate.validator.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -20,6 +26,28 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
+
+
+		<!-- Hibernate/JPA 2.1-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${org.hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${org.hibernate.version}</version>
+		</dependency>
+
+		<!-- Hibernate Validator (just for constraints extensions) -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${org.hibernate.validator.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
