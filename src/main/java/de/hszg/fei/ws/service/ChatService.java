@@ -2,11 +2,15 @@ package de.hszg.fei.ws.service;
 
 import javax.ws.rs.core.Response;
 
+import de.hszg.fei.ws.model.Message;
+import de.hszg.fei.ws.model.User;
+import de.hszg.fei.ws.model.UserWithRecipient;
+
 public interface ChatService {
 
 	public Response registryToServer(User user);
 	
 	public Response sendMessage(Message message);
 	
-	public Response getAllMessagesForUser(User user);
+	public Response getAllMessagesForUser(UserWithRecipient users);
 }
