@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -18,10 +19,10 @@ import de.hszg.fei.ws.model.UserWithRecipient;
 public class ChatServiceImpl implements ChatService{
 
 	@POST
-	@Path("/registryToServer")
+	@Path("/registerToServer")
 	@Consumes("application/json")
 	@Override
-	public Response registryToServer(User user) {
+	public Response registerToServer(User user) {
 		
 		UserList userListObject = getAllChatableUsers(user);
 		
@@ -38,7 +39,7 @@ public class ChatServiceImpl implements ChatService{
 		return Response.status(200).build();
 	}
 
-	@POST
+	@GET
 	@Path("/getAllMessagesForUser")
 	@Consumes("application/json")
 	@Override
@@ -48,12 +49,22 @@ public class ChatServiceImpl implements ChatService{
 		return Response.status(200).entity(messageListObject).build();
 	}
 	
+	@GET
+	@Path("/getAllMessagesForUser")
+	@Consumes("application/json")
+	@Override
+	public Response getMessagesForUser(UserWithRecipient user,
+			int numberOfMessages) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	private UserList getAllChatableUsers(User user){
 		UserList userListObject = new UserList();
 		List<User> userList = new ArrayList<User>();
 		
-		//TODO: For-Schleife über alle Server, Abfrage der möglichen User mit dem gegebenen User. 
-		//TODO: In jeder Schleife werden die möglichen User der Liste hinzugefügt.
+		//TODO: For-Schleife ï¿½ber alle Server, Abfrage der mï¿½glichen User mit dem gegebenen User. 
+		//TODO: In jeder Schleife werden die mï¿½glichen User der Liste hinzugefï¿½gt.
 		/* userList.add(returnwert der anfrage);*/
 		
 		//Stub-Daten
@@ -79,8 +90,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	private boolean putMessageIntoDatabase(Message message){
-		//TODO: Aufruf an die Datenbank mit dem User, dem Empfänger und der Message.
-		//TODO: Hier muss auch die Meldung an den Appserver gehen, dass eine neue Nachricht für den Empfänger da is.
+		//TODO: Aufruf an die Datenbank mit dem User, dem Empfï¿½nger und der Message.
+		//TODO: Hier muss auch die Meldung an den Appserver gehen, dass eine neue Nachricht fï¿½r den Empfï¿½nger da is.
 		
 		return true;
 	}
@@ -89,7 +100,7 @@ public class ChatServiceImpl implements ChatService{
 		MessageList messageListObject = new MessageList();
 		List<Message> messageList = new ArrayList<Message>();
 		
-		//TODO: Aufruf an die Datenbank mit User und Empfänger
+		//TODO: Aufruf an die Datenbank mit User und Empfï¿½nger
 		//TODO: Alle Ergebnisse werden in die messageList eingetragen
 		
 		//Stub-Daten
@@ -128,4 +139,5 @@ public class ChatServiceImpl implements ChatService{
 		
 		return messageListObject;
 	}
+	
 }

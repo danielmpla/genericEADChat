@@ -8,9 +8,11 @@ import de.hszg.fei.ws.model.UserWithRecipient;
 
 public interface ChatService {
 
-	public Response registryToServer(User user);
+	public Response registerToServer(User user);
 	
 	public Response sendMessage(Message message);
 	
 	public Response getAllMessagesForUser(UserWithRecipient users);
+	
+	public Response getMessagesForUser(UserWithRecipient user, int numberOfMessages);
 }
