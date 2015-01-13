@@ -20,7 +20,7 @@ import de.hszg.fei.ws.model.UserWithRecipient;
 
 @Path("/chatservice")
 @RequestScoped
-public class ChatServiceImpl /*implements ChatService*/{
+public class ChatServiceImpl implements ChatService{
 
 	@POST
 	@Path("/registerToServer")
@@ -43,7 +43,7 @@ public class ChatServiceImpl /*implements ChatService*/{
 		return Response.status(200).build();
 	}
 
-	/*@GET
+	@POST
 	@Path("/getAllMessagesForUser")
 	@Consumes("application/json")
 	@Override
@@ -51,16 +51,16 @@ public class ChatServiceImpl /*implements ChatService*/{
 		MessageList messageListObject = getAllMessagesForUserFromDatabase(users);
 		// TODO GET kann keine Entities empfangen
 		return Response.status(200).entity(messageListObject).build();
-	}*/
+	}
 	
-	/*@GET
+	@POST
 	@Path("/getAllMessagesForUser/{numberOfMessages}")
 	@Consumes("application/json")
 	@Override
 	public Response getMessagesForUser(@PathParam("numberOfMessages") int numberOfMessages, UserWithRecipient user) {
 		// TODO GET kann keine Entities empfangen
 		return null;
-	}*/
+	}
 	
 	private UserList getAllChatableUsers(User user){
 		UserList userListObject = new UserList();
