@@ -3,6 +3,9 @@ package de.hszg.fei.ws.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,12 +19,13 @@ import de.hszg.fei.ws.model.UserList;
 import de.hszg.fei.ws.model.UserWithRecipient;
 
 @Path("/chatservice")
-public class ChatServiceImpl implements ChatService{
+@RequestScoped
+public class ChatServiceImpl /*implements ChatService*/{
 
 	@POST
 	@Path("/registerToServer")
 	@Consumes("application/json")
-	@Override
+	/*@Override*/
 	public Response registerToServer(User user) {
 		
 		UserList userListObject = getAllChatableUsers(user);
@@ -32,32 +36,31 @@ public class ChatServiceImpl implements ChatService{
 	@POST
 	@Path("/sendMessage")
 	@Consumes("application/json")
-	@Override
+	/*@Override*/
 	public Response sendMessage(Message message) {
 		boolean isSuccess = putMessageIntoDatabase(message);
 		
 		return Response.status(200).build();
 	}
 
-	@GET
+	/*@GET
 	@Path("/getAllMessagesForUser")
 	@Consumes("application/json")
 	@Override
 	public Response getAllMessagesForUser(UserWithRecipient users) {
 		MessageList messageListObject = getAllMessagesForUserFromDatabase(users);
-		
+		// TODO GET kann keine Entities empfangen
 		return Response.status(200).entity(messageListObject).build();
-	}
+	}*/
 	
-	@GET
-	@Path("/getAllMessagesForUser")
+	/*@GET
+	@Path("/getAllMessagesForUser/{numberOfMessages}")
 	@Consumes("application/json")
 	@Override
-	public Response getMessagesForUser(UserWithRecipient user,
-			int numberOfMessages) {
-		// TODO Auto-generated method stub
+	public Response getMessagesForUser(@PathParam("numberOfMessages") int numberOfMessages, UserWithRecipient user) {
+		// TODO GET kann keine Entities empfangen
 		return null;
-	}
+	}*/
 	
 	private UserList getAllChatableUsers(User user){
 		UserList userListObject = new UserList();

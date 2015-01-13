@@ -3,7 +3,7 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="org.ead.gebaeudemanagement" transaction-type="JTA">
+    <persistence-unit name="de.hszg.fei.ws" transaction-type="JTA">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>jdbc/chat</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
