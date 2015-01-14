@@ -5,11 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
-import javax.websocket.server.PathParam;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -54,10 +50,10 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@POST
-	@Path("/getMessagesForUser")
+	@Path("/getMessagesForUser/{numberOfMessages}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Override
-	public Response getMessagesForUser(UserWithRecipient userWithRecipient) {
+	public Response getMessagesForUser(UserWithRecipient userWithRecipient, @PathParam("numberOfMessages") int numberOfMessages) {
 
 		return Response.status(666).build();
 	}
