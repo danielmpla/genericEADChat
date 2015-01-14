@@ -1,34 +1,31 @@
 package de.hszg.fei.ws.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
+@XmlSeeAlso(User.class)
+@XmlRootElement
 public class UserWithRecipient {
 
-	String userID;
-	String appID;
-	String userIDRecipient;
-	String appIDRecipient;
-	
-	public String getUserID() {
-		return userID;
+	private User user;
+	private User recipient;
+
+	public UserWithRecipient() {
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+
+	public User getUser() {
+		return user;
 	}
-	public String getAppID() {
-		return appID;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public void setAppID(String appID) {
-		this.appID = appID;
+
+	public User getRecipient() {
+		return recipient;
 	}
-	public String getUserIDRecipient() {
-		return userIDRecipient;
-	}
-	public void setUserIDRecipient(String userIDRecipient) {
-		this.userIDRecipient = userIDRecipient;
-	}
-	public String getAppIDRecipient() {
-		return appIDRecipient;
-	}
-	public void setAppIDRecipient(String appIDRecipient) {
-		this.appIDRecipient = appIDRecipient;
+
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 }

@@ -2,8 +2,10 @@ package de.hszg.fei.ws.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class User {
 
     @Id

@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.hszg.fei.ws.model.Message;
@@ -19,13 +20,12 @@ import de.hszg.fei.ws.model.UserList;
 import de.hszg.fei.ws.model.UserWithRecipient;
 
 @Path("/chatservice")
-@RequestScoped
 public class ChatServiceImpl implements ChatService{
 
 	@POST
 	@Path("/registerToServer")
-	@Consumes("application/json")
-	/*@Override*/
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Override
 	public Response registerToServer(User user) {
 		
 		UserList userListObject = getAllChatableUsers(user);
@@ -35,8 +35,8 @@ public class ChatServiceImpl implements ChatService{
 
 	@POST
 	@Path("/sendMessage")
-	@Consumes("application/json")
-	/*@Override*/
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Override
 	public Response sendMessage(Message message) {
 		boolean isSuccess = putMessageIntoDatabase(message);
 		
@@ -45,21 +45,21 @@ public class ChatServiceImpl implements ChatService{
 
 	@POST
 	@Path("/getAllMessagesForUser")
-	@Consumes("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Override
-	public Response getAllMessagesForUser(UserWithRecipient users) {
-		MessageList messageListObject = getAllMessagesForUserFromDatabase(users);
-		// TODO GET kann keine Entities empfangen
-		return Response.status(200).entity(messageListObject).build();
+	public Response getAllMessagesForUser(UserWithRecipient userWithRecipient) {
+//		MessageList messageListObject = getAllMessagesForUserFromDatabase(users);
+
+		return Response.status(200)/*.entity(messageListObject)*/.build();
 	}
 	
 	@POST
-	@Path("/getAllMessagesForUser/{numberOfMessages}")
-	@Consumes("application/json")
+	@Path("/getMessagesForUser")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Override
-	public Response getMessagesForUser(@PathParam("numberOfMessages") int numberOfMessages, UserWithRecipient user) {
-		// TODO GET kann keine Entities empfangen
-		return null;
+	public Response getMessagesForUser(UserWithRecipient userWithRecipient) {
+
+		return Response.status(666).build();
 	}
 	
 	private UserList getAllChatableUsers(User user){
@@ -99,7 +99,7 @@ public class ChatServiceImpl implements ChatService{
 		return true;
 	}
 	
-	private MessageList getAllMessagesForUserFromDatabase(UserWithRecipient users){
+	/*private MessageList getAllMessagesForUserFromDatabase(UserWithRecipient users){
 		MessageList messageListObject = new MessageList();
 		List<Message> messageList = new ArrayList<Message>();
 		
@@ -141,6 +141,6 @@ public class ChatServiceImpl implements ChatService{
 		messageListObject.setMessageList(messageList);
 		
 		return messageListObject;
-	}
+	}*/
 	
 }

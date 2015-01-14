@@ -14,5 +14,5 @@ public interface ChatService {
 	
 	public Response getAllMessagesForUser(UserWithRecipient users);
 	
-	public Response getMessagesForUser(int numberOfMessages, UserWithRecipient user);
+	public Response getMessagesForUser(UserWithRecipient user);
 }

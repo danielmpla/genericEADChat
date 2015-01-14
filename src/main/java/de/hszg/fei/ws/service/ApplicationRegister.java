@@ -1,5 +1,7 @@
 package de.hszg.fei.ws.service;
 
+import de.hszg.fei.ws.model.UserWithRecipient;
+
 import java.util.HashSet;
 import java.util.Set;
 
