@@ -3,20 +3,25 @@ package de.hszg.fei.ws.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.hszg.fei.ws.model.Message;
-import de.hszg.fei.ws.model.MessageList;
 import de.hszg.fei.ws.model.User;
 import de.hszg.fei.ws.model.UserList;
 import de.hszg.fei.ws.model.UserWithRecipient;
+import de.hszg.fei.ws.repository.MessageRepository;
+import de.hszg.fei.ws.repository.UserRepository;
 
 @Path("/chatservice")
 public class ChatServiceImpl implements ChatService{
+
+	@Inject
+	private UserRepository userRepository;
+	@Inject
+	private MessageRepository messageRepository;
 
 	@POST
 	@Path("/registerToServer")
