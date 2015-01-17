@@ -12,16 +12,14 @@ import de.hszg.fei.ws.model.Message;
 import de.hszg.fei.ws.model.User;
 import de.hszg.fei.ws.model.UserList;
 import de.hszg.fei.ws.model.UserWithRecipient;
-import de.hszg.fei.ws.repository.MessageRepository;
-import de.hszg.fei.ws.repository.UserRepository;
 
 @Path("/chatservice")
 public class ChatServiceImpl implements ChatService{
 
 	@Inject
-	private UserRepository userRepository;
+	private UserService userService;
 	@Inject
-	private MessageRepository messageRepository;
+	private MessageService messageService;
 
 	@POST
 	@Path("/registerToServer")
