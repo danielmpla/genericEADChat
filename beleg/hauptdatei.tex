@@ -1,0 +1,50 @@
+\documentclass[
+    11pt,               % KOMA default
+    a4paper,            % DIN A4
+    %twoside,            % Zweiseitig
+%     onside,
+    headsepline,        % Linie unter der Kopfzeile
+    foodsepline,        % Linie �ber Fussnote
+    %automark,           % Kolumnentitel lebendig
+    %pointlessnumbers,   % Keinen Punkt hinter die letzte Zahl
+                        % eines Kapitels (auch bei Anhang)
+%     openleft,           %
+    %openright,
+    cleardoubleplain,   %
+    %abstracton,         %
+    %idxtotoc,           % Index soll im Inhaltsverzeichnis auftauchen
+    liststotoc,         %
+    bibtotoc,           %
+    %parskip            % parskip-, parskip*, parskip+
+]%{scrreprt}
+{article}
+
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+
+\begin{document}
+\pagenumbering{gobble}
+\include{deckblatt}
+\pagenumbering{roman}
+
+\tableofcontents
+\setcounter{section}{0}
+
+\include{outline}
+
+\pagenumbering{arabic}
+
+
+\include{appendix}
+
+\end{document}

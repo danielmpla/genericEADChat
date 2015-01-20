@@ -19,3 +19,15 @@ hs_err_pid*
 # IntelliJ IDEA
 *.iml
 /.idea
+
+#latex
+*.aux
+*.bbl
+*.out
+*.synctex.gz
+*.toc
+*.log
+*.blg
+*.tcp
+*.tps
+hauptdatei.pdf

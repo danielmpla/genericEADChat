@@ -1,0 +1,535 @@
+\begin{appendix}
+\section{Slow Logs}
+
+\subsection{2015-01-05}
+\begin{footnotesize}
+\begin{verbatim}
+/usr/sbin/mysqld, Version: 5.5.35-0+wheezy1-log ((Debian)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+# Time: 150105  7:00:10
+# User@Host: admin[admin] @ localhost []
+# Query_time: 8.352955  Lock_time: 0.000000 Rows_sent: 3396604  Rows_examined: 3396604
+use kianaanalyticsreleasecandidate;
+SET timestamp=1420441210;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGE`;
+# Time: 150105  7:00:24
+# User@Host: admin[admin] @ localhost []
+# Query_time: 13.893395  Lock_time: 0.000000 Rows_sent: 9411757  Rows_examined: 9411757
+SET timestamp=1420441224;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGEVIEW`;
+# Time: 150105  8:00:10
+# User@Host: admin[admin] @ localhost []
+# Query_time: 8.403692  Lock_time: 0.000000 Rows_sent: 3396604  Rows_examined: 3396604
+SET timestamp=1420444810;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGE`;
+# Time: 150105  8:00:25
+# User@Host: admin[admin] @ localhost []
+# Query_time: 15.331077  Lock_time: 0.000000 Rows_sent: 9411757  Rows_examined: 9411757
+SET timestamp=1420444825;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGEVIEW`;
+# Time: 150105  8:18:06
+# User@Host: admin[admin] @  [141.46.220.80]
+# Query_time: 20.491991  Lock_time: 0.000106 Rows_sent: 24777  Rows_examined: 25713
+use kianaanalyticsrelease;
+SET timestamp=1420445886;
+SELECT * FROM SOCIALWIFIACCOUNT AS SWA join ACCESSPOINT AS AP on AP.id = SWA.ACCESSPOINT_id join CUSTOMERPROJECT AS C on C.id = AP.customerproject_id;
+# Time: 150105  9:00:10
+# User@Host: admin[admin] @ localhost []
+# Query_time: 8.537609  Lock_time: 0.000000 Rows_sent: 3396604  Rows_examined: 3396604
+use kianaanalyticsreleasecandidate;
+SET timestamp=1420448410;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGE`;
+# Time: 150105  9:00:26
+# User@Host: admin[admin] @ localhost []
+# Query_time: 15.620695  Lock_time: 0.000000 Rows_sent: 9411757  Rows_examined: 9411757
+SET timestamp=1420448426;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGEVIEW`;
+# Time: 150105 10:00:10
+# User@Host: admin[admin] @ localhost []
+# Query_time: 8.677848  Lock_time: 0.000000 Rows_sent: 3396604  Rows_examined: 3396604
+SET timestamp=1420452010;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGE`;
+# Time: 150105 10:00:29
+# User@Host: admin[admin] @ localhost []
+# Query_time: 17.228736  Lock_time: 0.000000 Rows_sent: 9411757  Rows_examined: 9411757
+SET timestamp=1420452029;
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGEVIEW`;
+/usr/sbin/mysqld, Version: 5.5.35-0+wheezy1-log ((Debian)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+# Time: 150105 10:03:35
+# User@Host: debian-sys-maint[debian-sys-maint] @ localhost []
+# Query_time: 8.037671  Lock_time: 0.000144 Rows_sent: 0  Rows_examined: 142
+SET timestamp=1420452215;
+select count(*) into @discard from `information_schema`.`PARTITIONS`;
+\end{verbatim}
+
+pt-query-digest
+\begin{verbatim}
+
+# 480ms user time, 30ms system time, 31.58M rss, 92.86M vsz
+# Current date: Mon Jan  5 16:33:30 2015
+# Hostname: arch
+# Files: mysql-slow.log
+# Overall: 10 total, 3 unique, 0.00 QPS, 0.01x concurrency _______________
+# Time range: 2015-01-05 07:00:10 to 10:03:35
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time           125s      8s     20s     12s     17s      4s     14s
+# Lock time          250us       0   144us    25us   103us    48us       0
+# Rows sent         48.88M       0   8.98M   4.89M   8.86M   3.50M   3.18M
+# Rows examine      48.88M     142   8.98M   4.89M   8.86M   3.50M   3.18M
+# Query size           593      45     149   59.30   65.89   29.40   46.83
+
+# Profile
+# Rank Query ID           Response time Calls R/Call  V/M   Item
+# ==== ================== ============= ===== ======= ===== ==============
+#    1 0x67A347A2812914DF 96.0460 77.1%     8 12.0058  1.07 SELECT PAGEVIEW
+#    2 0xC73A1125D4F0B6FF 20.4920 16.4%     1 20.4920  0.00 SELECT SOCIALWIFIACCOUNT ACCESSPOINT CUSTOMERPROJECT
+#    3 0xF47B7F81FA0E3307  8.0377  6.5%     1  8.0377  0.00 SELECT information_schema.PARTITIONS
+
+# Query 1: 0.00 QPS, 0.01x concurrency, ID 0x67A347A2812914DF at byte 2195
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 1.07
+# Time range: 2015-01-05 07:00:10 to 10:00:29
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         80       8
+# Exec time     77     96s      8s     17s     12s     17s      4s     15s
+# Lock time      0       0       0       0       0       0       0       0
+# Rows sent     99  48.86M   3.24M   8.98M   6.11M   8.86M   2.84M   8.86M
+# Rows examine  99  48.86M   3.24M   8.98M   6.11M   8.86M   2.84M   8.86M
+# Query size    63     376      45      49      47   46.83    1.12   46.83
+# String:
+# Databases    kianaanalyticsreleasecandidate
+# Hosts        localhost
+# Users        admin
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms
+#    1s  ################################################################
+#  10s+  ################################################################
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsreleasecandidate` LIKE 'PAGEVIEW'\G
+#    SHOW CREATE TABLE `kianaanalyticsreleasecandidate`.`PAGEVIEW`\G
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGEVIEW`\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT /*!40001 SQL_NO_CACHE */ * FROM `PAGEVIEW`\G
+
+# Query 2: 0 QPS, 0x concurrency, ID 0xC73A1125D4F0B6FF at byte 1122 _____
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: all events occurred at 2015-01-05 08:18:06
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         10       1
+# Exec time     16     20s     20s     20s     20s     20s       0     20s
+# Lock time     42   106us   106us   106us   106us   106us       0   106us
+# Rows sent      0  24.20k  24.20k  24.20k  24.20k  24.20k       0  24.20k
+# Rows examine   0  25.11k  25.11k  25.11k  25.11k  25.11k       0  25.11k
+# Query size    25     149     149     149     149     149       0     149
+# String:
+# Databases    kianaanalyticsrelease
+# Hosts        141.46.220.80
+# Users        admin
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms
+#    1s
+#  10s+  ################################################################
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'SOCIALWIFIACCOUNT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`SOCIALWIFIACCOUNT`\G
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'ACCESSPOINT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`ACCESSPOINT`\G
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'CUSTOMERPROJECT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`CUSTOMERPROJECT`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM SOCIALWIFIACCOUNT AS SWA join ACCESSPOINT AS AP on AP.id = SWA.ACCESSPOINT_id join CUSTOMERPROJECT AS C on C.id = AP.customerproject_id\G
+
+# Query 3: 0 QPS, 0x concurrency, ID 0xF47B7F81FA0E3307 at byte 2859 _____
+# This item is included in the report because it matches --limit.
+# Scores: V/M = 0.00
+# Time range: all events occurred at 2015-01-05 10:03:35
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         10       1
+# Exec time      6      8s      8s      8s      8s      8s       0      8s
+# Lock time     57   144us   144us   144us   144us   144us       0   144us
+# Rows sent      0       0       0       0       0       0       0       0
+# Rows examine   0     142     142     142     142     142       0     142
+# Query size    11      68      68      68      68      68       0      68
+# String:
+# Databases    kianaanalyticsreleasecandidate
+# Hosts        localhost
+# Users        debian-sys-maint
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms
+#    1s  ################################################################
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `information_schema` LIKE 'PARTITIONS'\G
+#    SHOW CREATE TABLE `information_schema`.`PARTITIONS`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+select count(*) into @discard from `information_schema`.`PARTITIONS`\G
+
+\end{verbatim}
+\end{footnotesize}
+
+\subsection{2015-01-12}
+
+Auf das komplette slow-query-log wird verzichtet, da es mehrere hundertausend Zeilen umfasst.
+
+\begin{footnotesize}
+\begin{verbatim}
+# 364.4s user time, 910ms system time, 35.71M rss, 97.04M vsz
+# Current date: Tue Jan 13 10:14:25 2015
+# Hostname: arch
+# Files: mysql-slow.log
+# Overall: 1.18M total, 67 unique, 35.88 QPS, 0.01x concurrency __________
+# Time range: 2015-01-12 06:27:25 to 15:35:36
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time           193s     1us   140ms   163us   214us   864us    33us
+# Lock time             6s       0     9ms     4us    44us    28us       0
+# Rows sent        317.23k       0   2.52k    0.28    0.99    7.28       0
+# Rows examine      60.73M       0   7.57k   53.97    0.99  357.02       0
+# Query size       171.47M       6     873  152.37  284.79   81.87  174.84
+
+# Profile
+# Rank Query ID           Response time Calls  R/Call V/M   Item
+# ==== ================== ============= ====== ====== ===== ==============
+#    1 0x4F3B30F4798652AA 55.2534 28.6%  13464 0.0041  0.00 SELECT ACCESSPOINT RADIO
+#    2 0x813031B8BBC3B329 42.3615 21.9%   8584 0.0049  0.01 COMMIT
+#    3 0xC26104202BE7D559 40.4141 20.9%  12928 0.0031  0.00 SELECT STORE RADIO ACCESSPOINT
+#    4 0xDDE49E1E5D9DC738 11.0263  5.7% 306002 0.0000  0.00 SELECT USER
+#    5 0x08C9B27EA9D6D8A9 10.4667  5.4% 308850 0.0000  0.00 SELECT AUTHORITIES
+#    6 0xB41AD57D91A3FCFF  7.2412  3.7%  53130 0.0001  0.00 SELECT ACCESSPOINT
+#    7 0xC660AB52454E0B67  6.9298  3.6% 162819 0.0000  0.00 SELECT CUSTOMERPROJECT
+#    8 0x62778F804DBD92B0  4.4515  2.3%  68234 0.0001  0.00 SELECT CONTROLLER
+#    9 0x9D4F63245160A479  4.1920  2.2% 120636 0.0000  0.00 SELECT BRANCH
+#   10 0x592D73560FB3E76D  1.7637  0.9%   6416 0.0003  0.01 UPDATE ACCESSPOINT
+# MISC 0xMISC              9.3909  4.9% 118946 0.0001   0.0 <57 ITEMS>
+
+# Query 1: 0.43 QPS, 0.00x concurrency, ID 0x4F3B30F4798652AA at byte 179386079
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:40:01 to 15:21:15
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1   13464
+# Exec time     28     55s     3ms    15ms     4ms     6ms   887us     4ms
+# Lock time     15   891ms    34us     8ms    66us   108us    72us    57us
+# Rows sent      4  13.21k       0       2    1.00    0.99    0.14    0.99
+# Rows examine  64  39.38M   3.00k   3.00k   3.00k   3.00k       0   3.00k
+# Query size     1   2.26M     176     176     176     176       0     176
+# String:
+# Databases    kianaanalyticsrelease
+# Hosts        kiana-import.c.stable-rdb-connections.intern...
+# Users        user
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ################################################################
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'ACCESSPOINT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`ACCESSPOINT`\G
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'RADIO'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`RADIO`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT t1.ID, t1.MAC, t1.RADIONAME, t1.ACCESSPOINT_ID FROM ACCESSPOINT t0, RADIO t1 WHERE (((t1.MAC = '08:5b:0e:5f:80:68') AND (t0.ACTIVE = 1)) AND (t0.ID = t1.ACCESSPOINT_ID))\G
+
+# Query 2: 0.27 QPS, 0.00x concurrency, ID 0x813031B8BBC3B329 at byte 66207063
+# Scores: V/M = 0.01
+# Time range: 2015-01-12 06:30:10 to 15:22:28
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0    8584
+# Exec time     21     42s     1ms   140ms     5ms     7ms     6ms     4ms
+# Lock time      0       0       0       0       0       0       0       0
+# Rows sent      0       0       0       0       0       0       0       0
+# Rows examine   0       0       0       0       0       0       0       0
+# Query size     0  50.30k       6       6       6       6       0       6
+# String:
+# Databases    kianaanaly... (8565/99%), kianaanaly... (19/0%)
+# Hosts        kiana-impo... (8538/99%), kiana-relc... (25/0%)... 2 more
+# Users        user
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ################################################################
+#  10ms  #
+# 100ms  #
+#    1s
+#  10s+
+commit\G
+
+# Query 3: 0.41 QPS, 0.00x concurrency, ID 0xC26104202BE7D559 at byte 122273843
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:41:03 to 15:21:23
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          1   12928
+# Exec time     20     40s     2ms    51ms     3ms     4ms   882us     3ms
+# Lock time     19      1s    45us     9ms    86us   131us   150us    69us
+# Rows sent      3  12.62k       1       1       1       1       0       1
+# Rows examine  34  20.92M   1.66k   1.66k   1.66k   1.66k       0   1.66k
+# Query size     2   4.02M     326     326     326     326       0     326
+# String:
+# Databases    kianaanalyticsrelease
+# Hosts        kiana-import.c.stable-rdb-connections.intern...
+# Users        user
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ################################################################
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'STORE'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`STORE`\G
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'RADIO'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`RADIO`\G
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'ACCESSPOINT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`ACCESSPOINT`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT t0.ID, t0.CITY, t0.COUNTRY, t0.PHONENUMBER, t0.POBOX, t0.STATE, t0.STORENAME, t0.STREET, t0.STREETNUMBER, t0.TIMEZONE, t0.ZIPCODE, t0.BRANCH_ID, t0.indoor_map FROM STORE t0, RADIO t2, ACCESSPOINT t1 WHERE (((t2.MAC = '08:5b:0e:60:97:48') AND (t1.ACTIVE = 1)) AND ((t1.ID = t2.ACCESSPOINT_ID) AND (t0.ID = t1.STORE_ID)))\G
+
+# Query 4: 9.31 QPS, 0.00x concurrency, ID 0xDDE49E1E5D9DC738 at byte 311812169
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:27:35 to 15:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         25  306002
+# Exec time      5     11s    10us     9ms    36us    49us    48us    31us
+# Lock time      0     3ms       0    92us       0       0       0       0
+# Rows sent      0      80       0       1    0.00       0    0.02       0
+# Rows examine   0      80       0       1    0.00       0    0.02       0
+# Query size    30  52.68M     179     181  180.53  174.84       0  174.84
+# String:
+# Databases    kianaanaly... (304005/99%)... 1 more
+# Hosts        kiana-impo... (287408/93%)... 4 more
+# Users        user
+# Query_time distribution
+#   1us
+#  10us  ################################################################
+# 100us  #
+#   1ms  #
+#  10ms
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'USER'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`USER`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ID, ACTIVATIONISREQUIRED, ACTIVATIONTOKEN, EMAIL, ENABLED, FIRSTNAME, LASTNAME, PASSWORD, PASSWORDCHANGEISREQUIRED, PHONENUMBER, CUSTOMERPROJECT_ID FROM USER WHERE (ID = 110)\G
+
+# Query 5: 9.39 QPS, 0.00x concurrency, ID 0x08C9B27EA9D6D8A9 at byte 223714233
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:27:35 to 15:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         26  308850
+# Exec time      5     10s     9us    10ms    33us    47us    48us    28us
+# Lock time      0     4ms       0   175us       0       0       0       0
+# Rows sent      0     189       0       5    0.00       0    0.03       0
+# Rows examine   0     189       0       5    0.00       0    0.03       0
+# Query size    11  19.89M      66      68   67.53   65.89       0   65.89
+# String:
+# Databases    kianaanaly... (306471/99%)... 1 more
+# Hosts        kiana-impo... (287408/93%)... 4 more
+# Users        user
+# Query_time distribution
+#   1us  #
+#  10us  ################################################################
+# 100us  #
+#   1ms  #
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'AUTHORITIES'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`AUTHORITIES`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ID, AUTHORITY, User_id FROM AUTHORITIES WHERE (User_id = 110)\G
+
+# Query 6: 1.65 QPS, 0.00x concurrency, ID 0xB41AD57D91A3FCFF at byte 135106328
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:40:00 to 15:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          4   53130
+# Exec time      3      7s    14us     6ms   136us   273us    87us   131us
+# Lock time     31      2s       0     5ms    34us    80us    43us    36us
+# Rows sent     11  36.00k       0       1    0.69    0.99    0.46    0.99
+# Rows examine   0  36.00k       0       1    0.69    0.99    0.46    0.99
+# Query size     6  11.59M     226     229  228.68  223.14    0.00  223.14
+# String:
+# Databases    kianaanaly... (52906/99%)... 1 more
+# Hosts        kiana-impo... (50020/94%)... 3 more
+# Users        user
+# Query_time distribution
+#   1us
+#  10us  ###########################
+# 100us  ################################################################
+#   1ms  #
+#  10ms
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'ACCESSPOINT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`ACCESSPOINT`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ID, ACCESSPOINTNAME, ACTIVE, BASEMAC, CONNECTED, LASTSUCCESSFULIMPORT, LAT, LNG, RSSITHRESHOLD, SERIALNUMBER, SSID, STALOCATE, WRITEPERMISSION, CONTROLLER_ID, CUSTOMERPROJECT_ID, STORE_ID FROM ACCESSPOINT WHERE (ID = 4651)\G
+
+# Query 7: 4.95 QPS, 0.00x concurrency, ID 0xC660AB52454E0B67 at byte 223713210
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:27:35 to 15:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         13  162819
+# Exec time      3      7s    12us     9ms    42us    63us    55us    36us
+# Lock time      0     6ms       0   233us       0       0     1us       0
+# Rows sent      0      65       0       1    0.00       0    0.02       0
+# Rows examine   0      65       0       1    0.00       0    0.02       0
+# Query size    26  45.34M     291     293  292.01  284.79       0  284.79
+# String:
+# Databases    kianaanaly... (161233/99%)... 1 more
+# Hosts        kiana-impo... (150676/92%)... 4 more
+# Users        user
+# Query_time distribution
+#   1us
+#  10us  ################################################################
+# 100us  #
+#   1ms  #
+#  10ms
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'CUSTOMERPROJECT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`CUSTOMERPROJECT`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ID, BRANDHOMEPAGE, DATASETNAME, DWELLTIMETHRESHOLDPASSTHRUTOVISITINSECONDS, DWELLTIMETHRESHOLDVISITTOENGAGEDINSECONDS, EMPLOYEFIXEDEQUIPMENTEXCLUSIONTIMEINHOUR, ENABLED, GOOGLEPROJECTID, GOOGLEPROJECTNUMBER, NAME, PROJECTCREATOR_ID, PROJECTADMIN_ID FROM CUSTOMERPROJECT WHERE (ID = 11)\G
+
+# Query 8: 2.08 QPS, 0.00x concurrency, ID 0x62778F804DBD92B0 at byte 343033627
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:29:07 to 15:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          5   68234
+# Exec time      2      4s    10us    10ms    65us   236us    96us    31us
+# Lock time     13   758ms       0     9ms    11us    66us    57us       0
+# Rows sent      3  12.33k       0       1    0.19    0.99    0.39       0
+# Rows examine   0  12.33k       0       1    0.19    0.99    0.39       0
+# Query size     6  11.66M     178     180  179.11  174.84       0  174.84
+# String:
+# Databases    kianaanaly... (67935/99%)... 1 more
+# Hosts        kiana-impo... (64564/94%)... 4 more
+# Users        user
+# Query_time distribution
+#   1us
+#  10us  ################################################################
+# 100us  ##############
+#   1ms  #
+#  10ms
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'CONTROLLER'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`CONTROLLER`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ID, CONTROLLERNAME, DOIMPORT, HTTPSPORT, LASTSUCCESSFULIMPORT, LOGIN, PASSWORD, PROTOCOL, SENSORCONTROLLERTYPE, URL, VDOM, projectCreator_id FROM CONTROLLER WHERE (ID = 59)\G
+
+# Query 9: 3.67 QPS, 0.00x concurrency, ID 0x9D4F63245160A479 at byte 209287203
+# Scores: V/M = 0.00
+# Time range: 2015-01-12 06:28:03 to 15:35:34
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         10  120636
+# Exec time      2      4s    11us    12ms    34us    47us    81us    28us
+# Lock time      0     7ms       0    95us       0       0     1us       0
+# Rows sent      0     241       0       1    0.00       0    0.04       0
+# Rows examine   0     241       0       1    0.00       0    0.04       0
+# Query size     5   9.17M      78      80   79.72   76.28       0   76.28
+# String:
+# Databases    kianaanaly... (119808/99%)... 1 more
+# Hosts        kiana-impo... (111744/92%)... 4 more
+# Users        user
+# Query_time distribution
+#   1us
+#  10us  ################################################################
+# 100us  #
+#   1ms  #
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'BRANCH'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`BRANCH`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT ID, BRANCHNAME, CUSTOMERPROJECT_ID, isPartOf FROM BRANCH WHERE (ID = 360)\G
+
+# Query 10: 0.21 QPS, 0.00x concurrency, ID 0x592D73560FB3E76D at byte 122273079
+# Scores: V/M = 0.01
+# Time range: 2015-01-12 06:41:18 to 15:22:28
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0    6416
+# Exec time      0      2s    97us    59ms   274us   287us     1ms   167us
+# Lock time      4   253ms    21us   262us    39us    63us    15us    33us
+# Rows sent      0       0       0       0       0       0       0       0
+# Rows examine   0   6.27k       1       1       1       1       0       1
+# Query size     0 530.40k      82      85   84.65   84.10    1.50   84.10
+# String:
+# Databases    kianaanalyticsrelease
+# Hosts        kiana-import.c.stable-rdb-connections.intern...
+# Users        user
+# Query_time distribution
+#   1us
+#  10us  #
+# 100us  ################################################################
+#   1ms  #
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS FROM `kianaanalyticsrelease` LIKE 'ACCESSPOINT'\G
+#    SHOW CREATE TABLE `kianaanalyticsrelease`.`ACCESSPOINT`\G
+UPDATE ACCESSPOINT SET LASTSUCCESSFULIMPORT = '2015-01-12 09:21:23' WHERE (ID = 4389)\G
+# Converted for EXPLAIN
+# EXPLAIN /*!50100 PARTITIONS*/
+select  LASTSUCCESSFULIMPORT = '2015-01-12 09:21:23' from ACCESSPOINT where  (ID = 4389)\G
+
+\end{verbatim}
+\end{footnotesize}
+\end{appendix}
