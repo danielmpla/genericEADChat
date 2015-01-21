@@ -1,6 +1,5 @@
 package de.hszg.fei.ws.service;
 
-import javax.ejb.Remote;
 import javax.ws.rs.core.Response;
 
 import de.hszg.fei.ws.model.Message;
@@ -13,7 +12,7 @@ public interface ChatService {
 	
 	public Response sendMessage(Message message);
 	
-	public Response getAllMessagesForUser(UserWithRecipient users);
+	//public Response getAllMessagesForUser(UserWithRecipient users);
 	
 	public Response getMessagesForUser(UserWithRecipient user, int numberOfMessages);
 }

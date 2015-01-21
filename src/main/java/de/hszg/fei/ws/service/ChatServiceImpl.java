@@ -3,22 +3,20 @@ package de.hszg.fei.ws.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Local;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.hszg.fei.ws.model.Message;
+import de.hszg.fei.ws.model.MessageList;
 import de.hszg.fei.ws.model.User;
 import de.hszg.fei.ws.model.UserList;
 import de.hszg.fei.ws.model.UserWithRecipient;
 
 @Path("/chatservice")
-@Stateless
-@Local(ChatService.class)
+@RequestScoped
 public class ChatServiceImpl implements ChatService{
 
 	@Inject
@@ -42,20 +40,20 @@ public class ChatServiceImpl implements ChatService{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Override
 	public Response sendMessage(Message message) {
-		boolean isSuccess = putMessageIntoDatabase(message);
+		boolean isSuccess = saveMessage(message);
 		
 		return Response.status(200).build();
 	}
 
-	@POST
-	@Path("/getAllMessagesForUser")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Override
-	public Response getAllMessagesForUser(UserWithRecipient userWithRecipient) {
-//		MessageList messageListObject = getAllMessagesForUserFromDatabase(users);
-
-		return Response.status(200)/*.entity(messageListObject)*/.build();
-	}
+//	@POST
+//	@Path("/getAllMessagesForUser")
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Override
+//	public Response getAllMessagesForUser(UserWithRecipient userWithRecipient) {
+////		MessageList messageListObject = getAllMessagesForUserFromDatabase(users);
+//
+//		return Response.status(200)/*.entity(messageListObject)*/.build();
+//	}
 	
 	@POST
 	@Path("/getMessagesForUser/{numberOfMessages}")
@@ -63,7 +61,9 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public Response getMessagesForUser(UserWithRecipient userWithRecipient, @PathParam("numberOfMessages") int numberOfMessages) {
 
-		return Response.status(666).build();
+		MessageList messageList = getAllMessages(userWithRecipient, numberOfMessages);
+		
+		return Response.status(200).entity(messageList).build();
 	}
 	
 	private UserList getAllChatableUsers(User user){
@@ -96,56 +96,4 @@ public class ChatServiceImpl implements ChatService{
 		
 		return userListObject;
 	}
-	
-	private boolean putMessageIntoDatabase(Message message){
-		//TODO: Aufruf an die Datenbank mit dem User, dem Empf�nger und der Message.
-		//TODO: Hier muss auch die Meldung an den Appserver gehen, dass eine neue Nachricht f�r den Empf�nger da is.
-		
-		return true;
-	}
-	
-	/*private MessageList getAllMessagesForUserFromDatabase(UserWithRecipient users){
-		MessageList messageListObject = new MessageList();
-		List<Message> messageList = new ArrayList<Message>();
-		
-		//TODO: Aufruf an die Datenbank mit User und Empf�nger
-		//TODO: Alle Ergebnisse werden in die messageList eingetragen
-		
-		//Stub-Daten
-		Message message1 = new Message();
-		message1.setAppID(users.getAppID());
-		message1.setAppIDRecipient(users.getAppIDRecipient());
-		message1.setUserID(users.getUserID());
-		message1.setUserIDRecipient(users.getUserIDRecipient());
-		
-		message1.setTimestampe("14-06-2014");
-		message1.setMessage("Na was geht?");
-		
-		Message message2 = new Message();
-		message2.setAppIDRecipient(users.getAppID());
-		message2.setAppID(users.getAppIDRecipient());
-		message2.setUserIDRecipient(users.getUserID());
-		message2.setUserID(users.getUserIDRecipient());
-		
-		message2.setTimestampe("14-06-2014");
-		message2.setMessage("Nix und bei dir?");
-		
-		Message message3 = new Message();
-		message3.setAppID(users.getAppID());
-		message3.setAppIDRecipient(users.getAppIDRecipient());
-		message3.setUserID(users.getUserID());
-		message3.setUserIDRecipient(users.getUserIDRecipient());
-		
-		message3.setTimestampe("14-06-2014");
-		message3.setMessage("Auch nix!");
-		
-		messageList.add(message1);
-		messageList.add(message2);
-		messageList.add(message3);
-		
-		messageListObject.setMessageList(messageList);
-		
-		return messageListObject;
-	}*/
-	
 }
