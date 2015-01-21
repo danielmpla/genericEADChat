@@ -3,6 +3,9 @@ package de.hszg.fei.ws.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +17,8 @@ import de.hszg.fei.ws.model.UserList;
 import de.hszg.fei.ws.model.UserWithRecipient;
 
 @Path("/chatservice")
+@Stateless
+@Local(ChatService.class)
 public class ChatServiceImpl implements ChatService{
 
 	@Inject
@@ -87,6 +92,7 @@ public class ChatServiceImpl implements ChatService{
 		userList.add(user3);
 		
 		userListObject.setUserList(userList);
+		userListObject.setNumUsers(userList.size());
 		
 		return userListObject;
 	}

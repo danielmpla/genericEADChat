@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "user")
@@ -11,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
 
     @Id
+    @XmlTransient
     private Long id;
     private String userID;
     private String appID;

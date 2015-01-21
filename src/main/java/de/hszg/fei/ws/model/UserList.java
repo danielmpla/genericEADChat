@@ -8,7 +8,17 @@ import java.util.List;
 @XmlRootElement
 public class UserList {
 	
+	private int numUsers;
+	
 	private List<User> userList;
+	
+	public int getNumUsers() {
+		return numUsers;
+	}
+
+	public void setNumUsers(int numUsers) {
+		this.numUsers = numUsers;
+	}
 
 	public List<User> getUserList() {
 		return userList;
