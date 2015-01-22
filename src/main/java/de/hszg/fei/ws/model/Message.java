@@ -1,34 +1,11 @@
 package de.hszg.fei.ws.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
-/**
- * Created by Daniel on 22.01.2015.
- */
-@XmlSeeAlso(User.class)
 @XmlRootElement
 public class Message {
-    private User user;
-    private User recipient;
-    private String message;
+	private String message;
     private Long timestamp;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
 
     public String getMessage() {
         return message;
