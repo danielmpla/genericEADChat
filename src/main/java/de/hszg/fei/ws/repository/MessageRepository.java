@@ -1,6 +1,7 @@
 package de.hszg.fei.ws.repository;
 
-import de.hszg.fei.ws.model.Message;
+import de.hszg.fei.ws.model.repository.MessageEntity;
+import de.hszg.fei.ws.model.repository.UserEntity;
 import de.hszg.fei.ws.repository.util.PersistenceRepository;
 
 import javax.annotation.Resource;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by Daniel on 12.01.2015.
  */
 @Dependent
-public class MessageRepository implements PersistenceRepository<Long, Message>, Serializable {
+public class MessageRepository implements PersistenceRepository<Long, MessageEntity>, Serializable {
     @PersistenceContext
     private EntityManager em;
 
@@ -23,7 +24,7 @@ public class MessageRepository implements PersistenceRepository<Long, Message>, 
     private UserTransaction utx;
 
     @Override
-    public Message save(Message entity) {
+    public MessageEntity save(MessageEntity entity) {
         try {
             this.utx.begin();
             if (entity.getId() == null) {
@@ -46,7 +47,7 @@ public class MessageRepository implements PersistenceRepository<Long, Message>, 
     }
 
     @Override
-    public void remove(Message entity) {
+    public void remove(MessageEntity entity) {
         try {
             this.utx.begin();
             this.em.remove(this.em.contains(entity) ? entity : this.em.merge(entity));
@@ -62,19 +63,26 @@ public class MessageRepository implements PersistenceRepository<Long, Message>, 
     }
 
     @Override
-    public Message find(Long id) {
-        return this.em.find(Message.class, id);
+    public MessageEntity find(Long id) {
+        return this.em.find(MessageEntity.class, id);
     }
 
     @Override
-    public List<Message> findAll() {
-        return this.em.createQuery("select m from Message m")
+    public List<MessageEntity> findAll() {
+        return this.em.createQuery("select m from MessageEntity m")
                 .getResultList();
     }
 
     @Override
     public Long getTotalCount() {
-        return (Long) this.em.createQuery("select count(m) from Message m")
+        return (Long) this.em.createQuery("select count(m) from MessageEntity m")
                 .getSingleResult();
+    }
+
+    public List<MessageEntity> find(UserEntity user, UserEntity recipient) {
+        return this.em.createQuery("select m from MessageEntity m where user = :user and recipient = :recipient order by timestamp desc")
+                .setParameter("user", user)
+                .setParameter("recipient", recipient)
+                .getResultList();
     }
 }

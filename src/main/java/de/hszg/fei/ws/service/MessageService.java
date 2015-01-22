@@ -1,5 +1,6 @@
 package de.hszg.fei.ws.service;
 
+import de.hszg.fei.ws.model.Message;
 import de.hszg.fei.ws.model.MessageList;
 import de.hszg.fei.ws.model.UserWithRecipient;
 
@@ -7,12 +8,12 @@ import de.hszg.fei.ws.model.UserWithRecipient;
  * Created by daniel on 17.01.15.
  */
 public interface MessageService {
-	
-	/*bekommt die Message, sollte ein true oder false bei erfolgreich/nichterfolgreich zurückgeben*/
-	/*Das Message Objekt enthält Sender, Empfänger, Timestamp und die Nachricht*/
-	public boolean saveMessage(String message);
-	
-	/*bekommt den Sender und Empfänger sowie die Anzahl der Nachrichten, sollte eine Liste mit allen Nachrichten bis numOfMessages zurückgeben*/
-	public MessageList getAllMessages(UserWithRecipient users, int numOfMessages);
-	
+
+    /*bekommt die Message, sollte ein true oder false bei erfolgreich/nichterfolgreich zurï¿½ckgeben*/
+    /*Das Message Objekt enthï¿½lt Sender, Empfï¿½nger, Timestamp und die Nachricht*/
+    public void saveMessage(Message message);
+
+    /*bekommt den Sender und Empfï¿½nger sowie die Anzahl der Nachrichten, sollte eine Liste mit allen Nachrichten bis numOfMessages zurï¿½ckgeben*/
+    public MessageList getAllMessages(UserWithRecipient users, int numOfMessages);
+
 }
