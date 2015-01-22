@@ -4,13 +4,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
-@XmlSeeAlso(MessageInput.class)
+@XmlSeeAlso(Message.class)
 @XmlRootElement
 public class MessageList {
 
 	private int numMessages;
 	
-    private List<MessageInput> messageList;
+    private List<Message> messageList;
 
     public int getNumMessages() {
 		return numMessages;
@@ -20,11 +20,11 @@ public class MessageList {
 		this.numMessages = numMessages;
 	}
 
-	public List<MessageInput> getMessageList() {
+	public List<Message> getMessageList() {
         return messageList;
     }
 
-    public void setMessageList(List<MessageInput> messageList) {
+    public void setMessageList(List<Message> messageList) {
         this.messageList = messageList;
     }
 }
