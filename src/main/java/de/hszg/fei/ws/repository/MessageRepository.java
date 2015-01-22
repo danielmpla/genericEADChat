@@ -80,7 +80,7 @@ public class MessageRepository implements PersistenceRepository<Long, MessageEnt
     }
 
     public List<MessageEntity> find(UserEntity user, UserEntity recipient) {
-        return this.em.createQuery("select m from MessageEntity m where user = :user and recipient = :recipient order by timestamp desc")
+        return this.em.createQuery("select m from MessageEntity m where (user = :user and recipient = :recipient) or (user = :recipient and recipient = :user) order by timestamp desc")
                 .setParameter("user", user)
                 .setParameter("recipient", recipient)
                 .getResultList();

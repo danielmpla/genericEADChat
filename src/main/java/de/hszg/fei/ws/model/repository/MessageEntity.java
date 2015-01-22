@@ -1,9 +1,6 @@
 package de.hszg.fei.ws.model.repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -11,6 +8,9 @@ import java.util.Date;
 public class MessageEntity {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private Long id;
     @ManyToOne
     private UserEntity user;

@@ -1,8 +1,6 @@
 package de.hszg.fei.ws.model.repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Daniel on 22.01.2015.
@@ -11,6 +9,9 @@ import javax.persistence.Table;
 @Table(name = "application")
 public class ApplicationEntity {
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private Long id;
     private String uri;
     private String name;

@@ -46,18 +46,4 @@ public class UserServiceImpl implements UserService, Serializable {
     public UserEntity find(User user) {
         return this.repository.find(user.getUserId(), user.getAppId());
     }
-
-    @Override
-    public void saveChatAbleUser(UserEntity userEntity, UserList userListObject) {
-        List<UserEntity> userEntityList = new ArrayList<>();
-
-        for (User user : userListObject.getUserList()) {
-            UserEntity userEntity1 = this.find(user);
-            userEntityList.add(userEntity1);
-        }
-
-        userEntity.setChatAbleUser(userEntityList);
-
-        this.repository.save(userEntity);
-    }
 }

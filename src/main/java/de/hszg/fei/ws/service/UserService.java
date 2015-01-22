@@ -13,6 +13,4 @@ public interface UserService {
     public UserEntity save(User user);
 
     public UserEntity find(User user);
-
-    public void saveChatAbleUser(UserEntity userEntity, UserList userListObject);
 }

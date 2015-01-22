@@ -6,6 +6,7 @@ import de.hszg.fei.ws.repository.util.PersistenceRepository;
 import javax.annotation.Resource;
 import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.*;
 import java.io.Serializable;
@@ -79,12 +80,17 @@ public class UserRepository implements PersistenceRepository<Long, UserEntity>, 
     }
 
     public boolean userIsSaved(Long userId, Long appId) {
-        UserEntity user = (UserEntity) this.em.createQuery("select u from UserEntity u where userID = :userId and application.id = :appId")
-                .setParameter("userId", userId)
-                .setParameter("appId", appId)
-                .getSingleResult();
+        UserEntity user = null;
+        try {
+            user = (UserEntity) this.em.createQuery("select u from UserEntity u where userID = :userId and application.id = :appId")
+                    .setParameter("userId", userId)
+                    .setParameter("appId", appId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return false;
+        }
 
-        return user != null;
+        return true;
     }
 
     public UserEntity find(Long userId, Long appId) {

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="ead-chat">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>DEMO</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-resource.min.js"></script>
+    <script src="js/controller.js"></script>
+
+</head>
+<body style="font-family:Verdana" ng-controller="ChatCtrl">
+<div class="container">
+    <div class="row " style="padding-top:40px;">
+        <h3 class="text-center" >Generic EAD-Chat Demo </h3>
+        <br /><br />
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Last 20 Messages
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list">
+
+                        <li class="media" ng-repeat="message in messages | orderBy : 'timestamp'">
+
+                            <div class="media-body">
+
+                                <div class="media">
+                                    <div class="media-body" >
+                                        {{message.message}}
+                                        <br />
+                                        <small class="text-muted">{{message.user.username}} | {{message.timestamp | date:'medium'}}</small>
+                                        <hr />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Message" ng-model="message"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info" type="button" ng-click="send()">SEND</button>
+                                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    USERS
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list">
+
+                        <li class="media" ng-repeat="user in users">
+
+                            <div class="media-body">
+
+                                <div class="media" ng-click="changeUser(user)">
+                                    <div class="media-body" >
+                                        <h5> {{user.username}} </h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <form>
+            <div class="form-group">
+                <label for="user">Username: </label>
+                <input id="user" class="form-control" type="text" ng-model="me.username">
+            </div>
+            <div class="form-group">
+                <label for="useri">UserId: </label>
+                <input id="useri" class="form-control" type="number" ng-model="me.userId" >
+            </div>
+            <div class="form-group">
+                <label for="app">AppId: </label>
+                <input id="app" class="form-control" type="number" ng-model="me.appId">
+            </div>
+            <div class="for-group">
+                <input type="button" value="register" class="btn btn-default" ng-click="register()">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

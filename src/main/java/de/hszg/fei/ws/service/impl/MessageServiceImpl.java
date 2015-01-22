@@ -2,6 +2,7 @@ package de.hszg.fei.ws.service.impl;
 
 import de.hszg.fei.ws.model.Message;
 import de.hszg.fei.ws.model.MessageList;
+import de.hszg.fei.ws.model.User;
 import de.hszg.fei.ws.model.UserWithRecipient;
 import de.hszg.fei.ws.model.repository.MessageEntity;
 import de.hszg.fei.ws.model.repository.UserEntity;
@@ -35,7 +36,7 @@ public class MessageServiceImpl implements MessageService, Serializable {
         messageEntity.setMessage(message.getMessage());
         messageEntity.setUser(user);
         messageEntity.setRecipient(recipient);
-        messageEntity.setTimestamp(new Date(message.getTimestamp() * 1000));
+        messageEntity.setTimestamp(new Date(message.getTimestamp()));
 
         this.repository.save(messageEntity);
     }
@@ -49,14 +50,32 @@ public class MessageServiceImpl implements MessageService, Serializable {
 
         List<Message> messages = new ArrayList<>();
 
-        for (MessageEntity messageEntity : messageEntities.subList(0, numOfMessages - 1)) {
-            Message message = new Message();
-            message.setMessage(messageEntity.getMessage());
-            message.setRecipient(users.getRecipient());
-            message.setUser(users.getUser());
-            message.setTimestamp(messageEntity.getTimestamp().getTime() / 1000);
+        if (messageEntities.size() != 0) {
 
-            messages.add(message);
+            if (numOfMessages > messageEntities.size()) {
+                numOfMessages = messageEntities.size();
+            }
+
+            for (MessageEntity messageEntity : messageEntities.subList(0, numOfMessages)) {
+                Message message = new Message();
+                User user1 = new User();
+                User recipient1 = new User();
+
+                user1.setUserId(messageEntity.getUser().getUserID());
+                user1.setUsername(messageEntity.getUser().getUsername());
+                user1.setAppId(messageEntity.getUser().getApplication().getId());
+
+                recipient1.setUserId(messageEntity.getRecipient().getUserID());
+                recipient1.setUsername(messageEntity.getRecipient().getUsername());
+                recipient1.setAppId(messageEntity.getRecipient().getApplication().getId());
+
+                message.setMessage(messageEntity.getMessage());
+                message.setRecipient(recipient1);
+                message.setUser(user1);
+                message.setTimestamp(messageEntity.getTimestamp().getTime());
+
+                messages.add(message);
+            }
         }
 
         MessageList messageList = new MessageList();

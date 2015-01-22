@@ -2,6 +2,7 @@ package de.hszg.fei.ws.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlSeeAlso(User.class)
@@ -9,8 +10,11 @@ import java.util.List;
 public class UserList {
 
     private int numUsers;
-
     private List<User> userList;
+
+    public UserList() {
+        this.userList = new ArrayList<>();
+    }
 
     public int getNumUsers() {
         return numUsers;

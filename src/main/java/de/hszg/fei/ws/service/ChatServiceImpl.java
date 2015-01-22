@@ -38,8 +38,6 @@ public class ChatServiceImpl implements ChatService {
 
         UserList userListObject = this.applicationService.findAllChatAbleUsers(user);
 
-        this.userService.saveChatAbleUser(userEntity, userListObject);
-
         return Response.status(200).entity(userListObject).build();
     }
 
