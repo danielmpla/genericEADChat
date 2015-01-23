@@ -81,6 +81,8 @@ public class MessageServiceImpl implements MessageService, Serializable {
         MessageList messageList = new MessageList();
         messageList.setMessageList(messages);
 
+        messageList.setNumMessages(messageList.getMessageList().size());
+
         return messageList;
     }
 }

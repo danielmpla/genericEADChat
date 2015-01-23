@@ -45,6 +45,8 @@ public class ApplicationServiceImpl implements ApplicationService, Serializable 
             userList.addUser(user1);
         }
 
+        userList.setNumUsers(userList.getUserList().size());
+
         return userList;
     }
 
